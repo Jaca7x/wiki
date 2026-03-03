@@ -6,24 +6,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0f0c1a] via-[#1a1428] to-[#2b1d3a] text-white">
 
-      <header className="flex justify-between items-center px-10 py-4">
-        <img src={logo} alt="icone" className="h-16 md:h-20" />
-
-        <nav>
-          <ol className="flex gap-8 text-gray-300 text-sm tracking-wider">
-            <li className="hover:text-[#c9a227] transition-colors duration-300 cursor-pointer">
-              Início
-            </li>
-            <li className="hover:text-[#c9a227] transition-colors duration-300 cursor-pointer">
-              Personagens
-            </li>
-            <li className="hover:text-[#c9a227] transition-colors duration-300 cursor-pointer">
-              História
-            </li>
-          </ol>
-        </nav>
-      </header>
-<section className="flex items-center justify-center"></section>
+      <section className="flex items-center justify-center"></section>
       <div
         className="relative h-[100vh] bg-cover bg-top flex items-center justify-center"
         style={{ backgroundImage: `url(${background})` }}

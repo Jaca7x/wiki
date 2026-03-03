@@ -1,17 +1,27 @@
 import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import SplashScreen from "@/components/SplashScreen";
+import NavBar from "@/components/NavBar";
+
 import Home from "@/pages/Home";
+//import Monsters from "@/pages/Monsters";
+//import Characters from "@/pages/Characters";
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(true);
 
+  if (showIntro) {
+    return <SplashScreen onFinish={() => setShowIntro(false)} />;
+  }
+
   return (
-    <>
-      {showIntro ? (
-        <SplashScreen onFinish={() => setShowIntro(false)} />
-      ) : (
-        <Home />
-      )}
-    </>
+    <BrowserRouter>
+      <NavBar />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
