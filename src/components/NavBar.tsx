@@ -16,8 +16,8 @@ export default function NavBar() {
     }
     if (pathname.startsWith("/monsters")) {
       return [
-        { name: "Goblins", path: "/monsters/goblin" },
-        { name: "Wolf", path: "/monsters/wolf" },
+        { name: "Goblins", path: "/monsters#goblins" },
+        { name: "Wolf", path: "/monsters#wolfs" },
         { name: "Boss", path: "/monsters/boss" },
       ];
     }
