@@ -18,7 +18,7 @@ export default function NavBar() {
       return [
         { name: "Goblins", path: "/monsters#goblins" },
         { name: "Wolf", path: "/monsters#wolfs" },
-        { name: "Boss", path: "/monsters/boss" },
+        { name: "Boss", path: "/monsters#boss" },
       ];
     }
     return [{ name: "Início", path: "/" }];
