@@ -2,25 +2,31 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import goblinTilte from "../assets/imgs/monsters/goblins-title.png";
+import goblinTilte from "@/assets/imgs/monsters/goblins-title.png";
 
-import goblinSprite from "../assets/imgs/sprites/goblin/goblin_sprite.png";
-import goblinArcherSprite from "../assets/imgs/sprites/goblin/goblin_archer_sprite.png";
-import goblinTankSprite from "../assets/imgs/sprites/goblin/goblin_tank_sprite.png";
-import goblinBombSprite from "../assets/imgs/sprites/goblin/goblin_bomb_sprite.png";
+import goblinSprite from "@/assets/imgs/sprites/goblin/goblin_sprite.png";
+import goblinArcherSprite from "@/assets/imgs/sprites/goblin/goblin_archer_sprite.png";
+import goblinTankSprite from "@/assets/imgs/sprites/goblin/goblin_tank_sprite.png";
+import goblinBombSprite from "@/assets/imgs/sprites/goblin/goblin_bomb_sprite.png";
 
-import wolfTitle from "../assets/imgs/monsters/wolf_title.png";
+import wolfTitle from "@/assets/imgs/monsters/wolf_title.png";
 
-import wolfSprite from "../assets/imgs/sprites/wolf/wolf_sprite.png";
-import whiteWolfSprite from "../assets/imgs/sprites/wolf/white_wolf_sprite.png";
-import redWolfSprite from "../assets/imgs/sprites/wolf/red_wolf_sprite.png";
+import wolfSprite from "@/assets/imgs/sprites/wolf/wolf_sprite.png";
+import whiteWolfSprite from "@/assets/imgs/sprites/wolf/white_wolf_sprite.png";
+import redWolfSprite from "@/assets/imgs/sprites/wolf/red_wolf_sprite.png";
 
-import bossTitle from "../assets/imgs/monsters/boss_title.png";
+import bossTitle from "@/assets/imgs/monsters/boss_title.png";
 
-import bossSprite from "../assets/imgs/sprites/boss/boss_attack.png"
+import bossSprite from "@/assets/imgs/sprites/boss/boss_attack.png"
 
-import SpriteAnimator from "@/components/SpriteAnimator";
+import npcsTtile from "@/assets/imgs/monsters/npcs_title.png"
+
+import npcSprite from "@/assets/imgs/sprites/npcs/npc_sprite.png"
+import ghostSprite from "@/assets/imgs/sprites/npcs/npc_ghost_sprite.png"
+import peasantSprite from "@/assets/imgs/sprites/npcs/peasant_sprite.png"
+
 import MonsterModal from "@/components/MonsterModal";
+import MonsterCard from "@/components/MonsterCard";
 
 export default function Monsters() {
 
@@ -32,9 +38,13 @@ export default function Monsters() {
     | "wolf"
     | "whiteWolf"
     | "redWolf"
-    | "boss";
+    | "boss"
+    | "knight"
+    | "ghost"
+    | "peasant";
+    
 
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [hoveredCard, setHoveredCard] = useState<MonsterKey | null>(null);
   const [selectMonster, setSelectMonster] = useState<MonsterKey | null>(null);
 
   const { hash } = useLocation();
@@ -48,7 +58,9 @@ export default function Monsters() {
     frames: number;
     scale: number;
     fps: number;
-    marginLeft: number;
+    marginLeftModal: number;
+    marginLeftCard: number;
+    marginBottom: number;
   }> = {
     goblin: {
       name: "Goblin",
@@ -59,43 +71,51 @@ export default function Monsters() {
       frames: 6,
       scale: 1,
       fps: 10,
-      marginLeft: 4.5
+      marginLeftModal: 4.5,
+      marginLeftCard: 40,
+      marginBottom: 0
     },
 
     archer: {
       name: "Goblin Archer",
       description: "Ataca a distância.",
       sprite: goblinArcherSprite,
-      frameWidth: 151,
+      frameWidth: 158,
       frameHeight: 128,
       frames: 9,
       scale: 1,
       fps: 10,
-      marginLeft: 3
+      marginLeftModal: 3,
+      marginLeftCard: 25,
+      marginBottom: 0
     },
 
     tank: {
       name: "Goblin Tank",
       description: "Muito resistente.",
       sprite: goblinTankSprite,
-      frameWidth: 300,
-      frameHeight: 195,
+      frameWidth: 220,
+      frameHeight: 200,
       frames: 10,
       scale: 1,
       fps: 10,
-      marginLeft: 2.5
+      marginLeftModal: 2.5,
+      marginLeftCard: 55,
+      marginBottom: 60
     },
 
     bomb: {
       name: "Goblin Bomb",
       description: "Explode perto do jogador.",
       sprite: goblinBombSprite,
-      frameWidth: 300,
-      frameHeight: 300,
+      frameWidth: 100,
+      frameHeight: 128,
       frames: 8,
-      scale: 1,
+      scale: 2.5,
       fps: 10,
-      marginLeft: -1
+      marginLeftModal: -1,
+      marginLeftCard: 0,
+      marginBottom: 0
     },
 
     wolf: {
@@ -107,7 +127,9 @@ export default function Monsters() {
       frames: 6,
       scale: 1,
       fps: 7,
-      marginLeft: 3
+      marginLeftModal: 3,
+      marginLeftCard: 20,
+      marginBottom: 60
     },
 
     whiteWolf: {
@@ -119,7 +141,9 @@ export default function Monsters() {
       frames: 4,
       scale: 1,
       fps: 8,
-      marginLeft: 3
+      marginLeftModal: 3,
+      marginLeftCard: 20,
+      marginBottom: 60
     },
 
     redWolf: {
@@ -131,7 +155,9 @@ export default function Monsters() {
       frames: 5,
       scale: 1,
       fps: 6,
-      marginLeft: 3
+      marginLeftModal: 2,
+      marginLeftCard: 0,
+      marginBottom: 60
     },
 
     boss: {
@@ -143,7 +169,51 @@ export default function Monsters() {
       frames: 9,
       scale: 2,
       fps: 6,
-      marginLeft: 0
+      marginLeftModal: 0,
+      marginLeftCard: 20,
+      marginBottom: 60
+    },
+
+    knight: {
+      name: "Cavaleiro Jovem",
+      description: "O chefe dos goblins.",
+      sprite: npcSprite,
+      frameWidth: 120,
+      frameHeight: 150,
+      frames: 4,
+      scale: 1,
+      fps: 2,
+      marginLeftModal: 4,
+      marginLeftCard: 0,
+      marginBottom: 20
+    },
+
+    ghost: {
+      name: "Cavaleiro Fantasma",
+      description: "O chefe dos goblins.",
+      sprite: ghostSprite,
+      frameWidth: 120,
+      frameHeight: 150,
+      frames: 3,
+      scale: 1,
+      fps: 2,
+      marginLeftModal: 4,
+      marginLeftCard: 0,
+      marginBottom: 20
+    },
+
+    peasant: {
+      name: "Fazendeiro",
+      description: "O chefe dos goblins.",
+      sprite: peasantSprite,
+      frameWidth: 120,
+      frameHeight: 150,
+      frames: 2,
+      scale: 1,
+      fps: 2,
+      marginLeftModal: 0,
+      marginLeftCard: 5,
+      marginBottom: 20
     }
   };
 
@@ -156,231 +226,154 @@ export default function Monsters() {
     }
   }, [hash]);
 
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0f0c1a] via-[#1a1428] to-[#2b1d3a] text-white">
+  const monsterGroups: Record<string, MonsterKey[]> = {
+    goblins: ["goblin", "archer", "tank", "bomb"],
+    wolfs: ["wolf", "whiteWolf", "redWolf"],
+    boss: ["boss"],
+    npcs: ["knight", "ghost", "peasant"]
+  };
 
-      <section id="goblins" className="flex flex-col items-center py-10 gap-6">
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-[#0f0c1a] via-[#1a1428] to-[#2b1d3a] text-white px-2 sm:px-4">
+
+      <section id="goblins" className="scroll-mt-24 flex flex-col items-center py-6 sm:py-8 md:py-10 gap-2">
         <div>
           <img
             src={goblinTilte}
             alt="Goblins Title"
-            className="h-28 object-contain"
+            className="h-14 sm:h-20 md:h-24 object-contain"
           />
         </div>
 
-        <div className="flex flex-row flex-wrap justify-center items-stretch gap-10 text-center px-4">
+        <div className="flex flex-row flex-wrap justify-center items-stretch gap-4 sm:gap-6 md:gap-10 text-center px-4 sm:px-6 md:px-8">
+          {monsterGroups.goblins.map((key) => {
+            const monster = monsters[key];
 
-          <div
-            className="bg-black/40 p-6 rounded-lg min-w-[240px] flex flex-col items-center justify-between transition-all duration-300 border border-transparent hover:border-[#c9a227]/30 cursor-pointer"
-            onMouseEnter={() => setHoveredCard("goblin")}
-            onMouseLeave={() => setHoveredCard(null)}
-            onClick={() => setSelectMonster("goblin")}
-          >
-
-            <div className="flex items-center justify-center h-[200px] w-full">
-              <div className="ml-8">
-                <SpriteAnimator
-                  sprite={goblinSprite}
-                  frameWidth={139.7}
-                  frameHeight={128}
-                  scale={1}
-                  frames={6}
-                  fps={hoveredCard === "goblin" ? 10 : 0}
-                />
-              </div>
-            </div>
-            <p className="text-[#c9a227] font-semibold mt-4 uppercase tracking-widest">
-              Goblin
-            </p>
-          </div>
-
-          <div
-            className="bg-black/40 p-6 rounded-lg min-w-[240px] flex flex-col items-center justify-between transition-all duration-300 border border-transparent hover:border-[#c9a227]/30 cursor-pointer"
-            onMouseEnter={() => setHoveredCard("archer")}
-            onMouseLeave={() => setHoveredCard(null)}
-            onClick={() => setSelectMonster("archer")}
-          >
-            <div className="flex items-center justify-center h-[200px] w-full">
-              <div className="ml-5">
-                <SpriteAnimator
-                  sprite={goblinArcherSprite}
-                  frameWidth={151}
-                  frameHeight={128}
-                  scale={1.0}
-                  frames={9}
-                  fps={hoveredCard === "archer" ? 10 : 0}
-                />
-              </div>
-            </div>
-            <p className="text-[#c9a227] font-semibold mt-4 uppercase tracking-widest">
-              Goblin Arqueiro
-            </p>
-          </div>
-
-          <div
-            className="bg-black/40 p-6 rounded-lg min-w-[320px] flex flex-col items-center justify-between transition-all duration-300 border border-transparent hover:border-[#c9a227]/30 cursor-pointer"
-            onMouseEnter={() => setHoveredCard("tank")}
-            onMouseLeave={() => setHoveredCard(null)}
-            onClick={() => setSelectMonster("tank")}
-          >
-            <div className="flex items-center justify-center h-[160px] w-full">
-              <div className="ml-15">
-                <SpriteAnimator
-                  sprite={goblinTankSprite}
-                  frameWidth={300}
-                  frameHeight={195}
-                  scale={1}
-                  frames={10}
-                  fps={hoveredCard === "tank" ? 10 : 0}
-                />
-              </div>
-            </div>
-            <p className="text-[#c9a227] font-semibold mt-4 uppercase tracking-widest">
-              Goblin Tank
-            </p>
-          </div>
-
-          <div
-            className="bg-black/40 p-6 rounded-lg min-w-[240px] flex flex-col items-center justify-between transition-all duration-300 border border-transparent hover:border-[#c9a227]/30 cursor-pointer"
-            onMouseEnter={() => setHoveredCard("bomb")}
-            onMouseLeave={() => setHoveredCard(null)}
-            onClick={() => setSelectMonster("bomb")}
-          >
-            <div className="flex items-center justify-center h-[200px] w-full">
-              <SpriteAnimator
-                sprite={goblinBombSprite}
-                frameWidth={128}
-                frameHeight={128}
-                scale={2.5}
-                frames={8}
-                fps={hoveredCard === "bomb" ? 10 : 0}
+            return (
+              <MonsterCard
+                key={key}
+                name={monster.name}
+                sprite={monster.sprite}
+                frameWidth={monster.frameWidth}
+                frameHeight={monster.frameHeight}
+                frames={monster.frames}
+                scale={monster.scale}
+                fps={monster.fps}
+                marginLeft={monster.marginLeftCard}
+                marginBottom={monster.marginBottom}
+                hovered={hoveredCard === key}
+                onHover={() => setHoveredCard(key)}
+                onLeave={() => setHoveredCard(null)}
+                onClick={() => setSelectMonster(key)}
               />
-            </div>
-            <p className="text-[#c9a227] font-semibold mt-4 uppercase tracking-widest">
-              Goblin Bomba
-            </p>
-          </div>
-
+            );
+          })}
         </div>
+
       </section>
 
-      <section id="wolfs" className="flex flex-col items-center py-10 gap-6">
+      <section id="wolfs" className="scroll-mt-24 flex flex-col items-center py-10 gap-6">
         <div>
           <img
             src={wolfTitle}
             alt="Wolfs Title"
-            className="h-24 object-contain"
+            className="h-14 sm:h-20 md:h-24 object-contain"
           />
         </div>
 
-        <div className="flex flex-row flex-wrap justify-center items-stretch gap-10 text-center px-4">
+        <div className="flex flex-row flex-wrap justify-center items-stretch gap-4 sm:gap-6 md:gap-10 text-center px-4 sm:px-6 md:px-8">
+          {monsterGroups.wolfs.map((key) => {
+            const monster = monsters[key];
 
-          <div
-            className="bg-black/40 p-6 rounded-lg min-w-[240px] flex flex-col items-center justify-between transition-all duration-300 border border-transparent hover:border-[#c9a227]/30 cursor-pointer"
-            onMouseEnter={() => setHoveredCard("wolf")}
-            onMouseLeave={() => setHoveredCard(null)}
-            onClick={() => setSelectMonster("wolf")}
-          >
-
-            <div className="flex items-center justify-center h-[200px] w-full">
-              <div className="ml-5">
-                <SpriteAnimator
-                  sprite={wolfSprite}
-                  frameWidth={180}
-                  frameHeight={180}
-                  scale={1}
-                  frames={6}
-                  fps={hoveredCard === "wolf" ? 8 : 0}
-                />
-              </div>
-            </div>
-            <p className="text-[#c9a227] font-semibold mt-4 uppercase tracking-widest">
-              Lobo
-            </p>
-          </div>
-          <div
-            className="bg-black/40 p-6 rounded-lg min-w-[240px] flex flex-col items-center justify-between transition-all duration-300 border border-transparent hover:border-[#c9a227]/30 cursor-pointer"
-            onMouseEnter={() => setHoveredCard("whiteWolf")}
-            onMouseLeave={() => setHoveredCard(null)}
-            onClick={() => setSelectMonster("whiteWolf")}
-          >
-
-            <div className="flex items-center justify-center h-[200px] w-full">
-              <div className="ml-5">
-                <SpriteAnimator
-                  sprite={whiteWolfSprite}
-                  frameWidth={180}
-                  frameHeight={180}
-                  scale={1}
-                  frames={4}
-                  fps={hoveredCard === "whiteWolf" ? 6 : 0}
-                />
-              </div>
-            </div>
-            <p className="text-[#c9a227] font-semibold mt-4 uppercase tracking-widest">
-              Lobo Albino
-            </p>
-          </div>
-
-          <div
-            className="bg-black/40 p-6 rounded-lg min-w-[240px] flex flex-col items-center justify-between transition-all duration-300 border border-transparent hover:border-[#c9a227]/30 cursor-pointer"
-            onMouseEnter={() => setHoveredCard("redWolf")}
-            onMouseLeave={() => setHoveredCard(null)}
-            onClick={() => setSelectMonster("redWolf")}
-          >
-
-            <div className="flex items-center justify-center h-[200px] w-full">
-              <div>
-                <SpriteAnimator
-                  sprite={redWolfSprite}
-                  frameWidth={180}
-                  frameHeight={180}
-                  scale={1}
-                  frames={5}
-                  fps={hoveredCard === "redWolf" ? 6 : 0}
-                />
-              </div>
-            </div>
-            <p className="text-[#c9a227] font-semibold mt-4 uppercase tracking-widest">
-              Lobo Rubro
-            </p>
-          </div>
+            return (
+              <MonsterCard
+                key={key}
+                name={monster.name}
+                sprite={monster.sprite}
+                frameWidth={monster.frameWidth}
+                frameHeight={monster.frameHeight}
+                frames={monster.frames}
+                scale={monster.scale}
+                fps={monster.fps}
+                marginLeft={monster.marginLeftCard}
+                marginBottom={monster.marginBottom}
+                hovered={hoveredCard === key}
+                onHover={() => setHoveredCard(key)}
+                onLeave={() => setHoveredCard(null)}
+                onClick={() => setSelectMonster(key)}
+              />
+            );
+          })}
         </div>
       </section>
 
-      <section id="boss" className="flex flex-col items-center py-10 gap-6">
+      <section id="boss" className="scroll-mt-24 flex flex-col items-center py-10 gap-6">
         <div>
           <img
             src={bossTitle}
             alt="Boss title"
-            className="h-24 object-contain"
+            className="h-14 sm:h-20 md:h-24 object-contain"
           />
         </div>
 
-        <div
-          className="bg-black/40 p-8 rounded-lg min-w-[240px] flex flex-col items-center justify-between transition-all duration-300 border border-transparent hover:border-[#c9a227]/30 cursor-pointer"
-          onMouseEnter={() => setHoveredCard("boss")}
-          onMouseLeave={() => setHoveredCard(null)}
-          onClick={() => setSelectMonster("boss")}
-        >
+        <div className="flex flex-wrap justify-center items-stretch text-center">
+          {monsterGroups.boss.map((key) => {
+            const monster = monsters[key];
 
-          <div className="flex items-center justify-center h-[200px] w-full">
-            <div>
-              <div className="ml-6">
-                <SpriteAnimator
-                  sprite={bossSprite}
-                  frameWidth={140}
-                  frameHeight={128}
-                  scale={2}
-                  frames={9}
-                  fps={hoveredCard === "boss" ? 6 : 0}
-                />
-              </div>
-            </div>
-          </div>
-          <p className="text-[#c9a227] font-semibold mt-10 uppercase tracking-widest">
-            Brakkor, O Dourado
-          </p>
+            return (
+              <MonsterCard
+                key={key}
+                name={monster.name}
+                sprite={monster.sprite}
+                frameWidth={monster.frameWidth}
+                frameHeight={monster.frameHeight}
+                frames={monster.frames}
+                scale={monster.scale}
+                fps={monster.fps}
+                marginLeft={monster.marginLeftCard}
+                marginBottom={monster.marginBottom}
+                hovered={hoveredCard === key}
+                onHover={() => setHoveredCard(key)}
+                onLeave={() => setHoveredCard(null)}
+                onClick={() => setSelectMonster(key)}
+              />
+            );
+          })}
+        </div>
+      </section>
+
+      <section id="npcs" className="scroll-mt-24 flex flex-col items-center py-10 gap-6">
+        <div>
+          <img
+            src={npcsTtile}
+            alt="Npcs title"
+            className="h-14 sm:h-20 md:h-24 object-contain"
+          />
+        </div>
+
+        <div className="flex flex-row flex-wrap justify-center items-stretch gap-4 sm:gap-6 md:gap-10 text-center px-4 sm:px-6 md:px-8">
+          {monsterGroups.npcs.map((key) => {
+            const monster = monsters[key];
+
+            return (
+              <MonsterCard
+                key={key}
+                name={monster.name}
+                sprite={monster.sprite}
+                frameWidth={monster.frameWidth}
+                frameHeight={monster.frameHeight}
+                frames={monster.frames}
+                scale={monster.scale}
+                fps={monster.fps}
+                marginLeft={monster.marginLeftCard}
+                marginBottom={monster.marginBottom}
+                hovered={hoveredCard === key}
+                onHover={() => setHoveredCard(key)}
+                onLeave={() => setHoveredCard(null)}
+                onClick={() => setSelectMonster(key)}
+              />
+            );
+          })}
         </div>
       </section>
 
@@ -396,10 +389,9 @@ export default function Monsters() {
           frames={monsters[selectMonster].frames}
           scale={monsters[selectMonster].scale}
           fps={monsters[selectMonster].fps}
-          marginLeft={monsters[selectMonster].marginLeft}
+          marginLeft={monsters[selectMonster].marginLeftModal}
         />
       )}
-
     </div>
   );
 }
