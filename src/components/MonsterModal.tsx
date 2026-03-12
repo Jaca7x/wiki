@@ -31,9 +31,9 @@ export default function MonsterModal({
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/70 z-50">
-
-            <div className="bg-white text-black p-6 rounded-lg w-[300px] text-center">
+        <div className="fixed inset-0 flex justify-center items-center bg-black/70 z-50 ">
+            
+            <div className="bg-gradient-to-b from-[#0f0c1a] via-[#1a1428] to-[#2b1d3a] text-white p-5 rounded-lg w-[400px] h-[800px] text-center">
 
                 <h2 className="text-xl font-bold mb-2">
                     {title}
