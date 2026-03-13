@@ -11,6 +11,11 @@ import Monsters from "@/pages/Monsters";
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(true);
+  const [userHasInteract, setUserHasInteract] = useState(false);
+
+  function onUserInteract() {
+    setUserHasInteract(true);
+  }
 
   if (showIntro) {
     return <SplashScreen onFinish={() => setShowIntro(false)} />;
@@ -18,10 +23,13 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
-      
+      {userHasInteract && <NavBar />}
+
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={<Home onUserInteract={onUserInteract} />}
+        />
         <Route path="/monsters" element={<Monsters />} />
       </Routes>
 
