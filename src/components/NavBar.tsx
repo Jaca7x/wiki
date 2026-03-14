@@ -7,22 +7,33 @@ export default function NavBar() {
   const [visible, setVisible] = useState(false);
   const [olVisible, setOlVisible] = useState(false);
 
-  useEffect(() => {
-    const fadeInTimer = setTimeout(() => {
-      setVisible(true);
-    }, 200);
+  const isHome = pathname === "/";
 
-    const fadeInOlTimer = setTimeout(() => {
+  useEffect(() => {
+
+    if (!isHome) {
+      setVisible(true);
       setOlVisible(true);
-    }, 350);
+      return;
+    }
+
+    const handleScroll = () => {
+      setVisible(true);
+
+      setTimeout(() => {
+        setOlVisible(true);
+      }, 150);
+
+      window.removeEventListener("scroll", handleScroll);
+    };
+
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      clearTimeout(fadeInTimer);
-      clearTimeout(fadeInOlTimer);
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
 
-  const isHome = pathname === "/";
+  }, [isHome]);
 
   const getNavLinks = () => {
     if (isHome) {
@@ -51,8 +62,8 @@ export default function NavBar() {
         sticky top-0 w-full z-50 transition-all duration-300
         ${isHome ? "py-10" : "py-6"} 
         bg-[linear-gradient(to_bottom,rgba(15,12,26,0.95),rgba(26,20,40,0.9),rgba(43,29,58,0.85))]
-        transition-opacity duration-500
-        ${visible ? "opacity-100" : "opacity-0"}
+        transition-all duration-500
+        ${visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}
       `}
     >
       <nav className="relative flex items-center max-w-7xl mx-auto px-4 sm:px-6 md:px-10">

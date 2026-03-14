@@ -1,32 +1,8 @@
 import logo from "../assets/imgs/icon/icon.png";
 import background from "../assets/imgs/home/background-home.png";
 import initialTitle from "../assets/imgs/home/initial-title.png";
-import { useEffect, useState } from "react";
 
-type HomeProps = {
-  onUserInteract: () => void;
-};
-
-export default function Home( {onUserInteract }: HomeProps) {
-
-  const [hasInteract, setHasInteract] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if(!hasInteract)
-      {
-        onUserInteract();
-        setHasInteract(true);
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-    window.removeEventListener("scroll", handleScroll);
-  };
-
-  }, [hasInteract, onUserInteract]);
+export default function Home() {
 
   return ( 
     <div className="min-h-screen bg-gradient-to-b from-[#0f0c1a] via-[#1a1428] to-[#2b1d3a] text-white">
