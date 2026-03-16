@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useSpriteAnimation } from "@/hooks/useSpriteAnimation";
 
 type SpriteAnimatorProps = {
   sprite: string;
@@ -18,23 +18,8 @@ export default function SpriteAnimator({
   fps = 8
 }: SpriteAnimatorProps) {
 
-  const [frame, setFrame] = useState(0);
-
-  useEffect(() => {
-
-    if (fps === 0) 
-    {
-        setFrame(0);
-        return
-    };
-    
-    const interval = setInterval(() => {
-      setFrame((prev) => (prev + 1) % frames);
-    }, 1000 / fps);
-
-    return () => clearInterval(interval);
-  }, [frames, fps]);
-
+  const frame = useSpriteAnimation({ frames, fps });
+  
   return (
   <div
     style={{

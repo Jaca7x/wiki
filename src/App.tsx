@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 
-import SplashScreen from "@/components/SplashScreen";
-import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
+import SplashScreen from "@/utils/SplashScreen";
+import NavBar from "@/components/ui/NavBar";
+import Footer from "@/components/ui/Footer";
 
 import Home from "@/pages/Home";
 import Monsters from "@/pages/Monsters";

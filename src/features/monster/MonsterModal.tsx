@@ -1,4 +1,4 @@
-import SpriteAnimator from "./SpriteAnimator";
+import SpriteAnimator from "@/utils/SpriteAnimator";
 
 interface MonsterModalProps {
     isOpen: boolean;

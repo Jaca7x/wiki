@@ -25,8 +25,8 @@ import npcSprite from "@/assets/imgs/sprites/npcs/npc_sprite.png"
 import ghostSprite from "@/assets/imgs/sprites/npcs/npc_ghost_sprite.png"
 import peasantSprite from "@/assets/imgs/sprites/npcs/peasant_sprite.png"
 
-import MonsterModal from "@/components/MonsterModal";
-import MonsterCard from "@/components/MonsterCard";
+import MonsterModal from "@/features/monster/MonsterModal";
+import MonsterCard from "@/features/monster/MonsterCard";
 
 export default function Monsters() {
 
