@@ -35,8 +35,19 @@ export default function Home() {
             Este projeto é o resultado de uma jornada de aprendizado no mundo do game development. Desenvolvido como um projeto estudantil, meu objetivo foi aprender os fundamentos do desenvolvimento de jogos, praticar lógica e consolidar meus conhecimentos na linguagem C. Utilizando a biblioteca Raylib, criei um jogo totalmente em C, que explora mecânicas simples, mas com uma identidade visual única. Agora, o código está disponível no meu repositório no GitHub, convidando você a explorar, aprender e se inspirar nessa experiência.
           </p>
 
-          <a className="mt-4 px-8 py-3 bg-[#c9a227] text-black font-semibold rounded-lg 
-          hover:scale-105 transition-transform duration-300 shadow-lg mb-10" href="https://github.com/Jaca7x/Knight-s-Quest" target="_blank">
+          <a
+            href="https://github.com/Jaca7x/Knight-s-Quest"
+            target="_blank"
+            className="
+            bg-[#c9a227] text-black
+            font-semibold uppercase tracking-wide
+            rounded-lg
+            shadow-lg
+            transition-all duration-300
+            hover:scale-105 hover:shadow-[0_0_15px_rgba(201,162,39,0.7)]
+            mt-4 px-8 py-3
+            active:scale-95
+            mb-10">
             Começar Jornada!
           </a>
 
