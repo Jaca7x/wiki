@@ -1,10 +1,10 @@
 import { useEffect, useState, useMemo } from "react";
 import { useLocation } from "react-router-dom";
-import { monsters } from "../data/monster";
-import type { MonsterKey } from "../data/monster"
+import { monsters } from "@/data/monster";
+import type { MonsterKey } from "@/data/monster"
 
 import goblinTitle from "@/assets/imgs/monsters/goblins-title.png";
-import wolfTitle from "@/assets/imgs/monsterDs/wolf_title.png";
+import wolfTitle from "@/assets/imgs/monsters/wolf_title.png";
 import bossTitle from "@/assets/imgs/monsters/goblins-title.png";
 import npcsTitle from "@/assets/imgs/monsters/goblins-title.png";
 

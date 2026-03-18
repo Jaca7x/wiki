@@ -2,6 +2,7 @@ import SpriteAnimator from "@/utils/SpriteAnimator";
 import { motion, AnimatePresence } from "framer-motion";
 import background from "@/assets/imgs/home/background-home.png";
 import { useEffect, useState, useRef } from "react";
+import type { MonsterData } from "@/data/monster";
 
 const ArrowLeft = () => (
   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -14,21 +15,6 @@ const ArrowRight = () => (
     <path d="M9 18l6-6-6-6" />
   </svg>
 );
-
-interface MonsterData {
-  sprite: string;
-  name: string;
-  description: string;
-  frameWidth: number;
-  frameHeight: number;
-  frames: number;
-  scale: number;
-  fps?: number;
-  marginLeftModal: number;
-  valueAtk: string;
-  valueLife: string;
-  valueSpe: string;
-}
 
 interface MonsterModalProps {
   isOpen: boolean;
@@ -58,29 +44,49 @@ export default function MonsterModal({
     if (currentIndex > 0) setCurrentIndex((prev) => prev - 1);
   };
 
+  const handleBack = () => {
+    onClose();
+  }
+
   useEffect(() => {
     if (!isOpen) return;
+
+    if(isOpen) {
+      history.pushState({ modal: true}, "");
+    }
+
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowRight") handleNext();
       if (e.key === "ArrowLeft") handlePrev();
     };
 
+    const handlePopState = () => {
+      if(isOpen) handleBack();
+    };
+
     const handleWheel = (e: WheelEvent) => {
       if (isScrolling.current) return;
+
       if (Math.abs(e.deltaY) > 30 || Math.abs(e.deltaX) > 30) {
+
         isScrolling.current = true;
+
         if (e.deltaY > 0 || e.deltaX > 0) handleNext();
         else handlePrev();
+
         setTimeout(() => (isScrolling.current = false), 600);
       }
     };
 
     window.addEventListener("keydown", handleKey);
     window.addEventListener("wheel", handleWheel);
+    window.addEventListener("popstate", handlePopState)
+
     return () => {
       window.removeEventListener("keydown", handleKey);
       window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("popstate", handlePopState )
     };
   }, [isOpen, currentIndex]);
 
@@ -189,9 +195,9 @@ export default function MonsterModal({
                   </p>
 
                   <div className="grid grid-cols-3 gap-4 w-full max-w-sm">
-                    <StatBadge label="ATK" value={currentMonster.valueAtk} color="text-red-500" />
-                    <StatBadge label="HP" value={currentMonster.valueLife} color="text-blue-500" />
-                    <StatBadge label="SPD" value={currentMonster.valueSpe} color="text-green-500" />
+                    <StatBadge label="ATAQUE" value={currentMonster.valueAtk} color="text-red-500" />
+                    <StatBadge label="VIDA" value={currentMonster.valueLife} color="text-blue-500" />
+                    <StatBadge label="VELOCIDADE" value={currentMonster.valueSpe} color="text-green-500" />
                   </div>
                 </motion.div>
               </AnimatePresence>
