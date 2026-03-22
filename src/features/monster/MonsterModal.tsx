@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import background from "@/assets/imgs/home/background-home.png";
 import { useEffect, useState, useRef } from "react";
 import type { MonsterData } from "@/data/monster";
+import { ANIM_VARIANTS_MODAL } from "@/utils/animations/modal/modal_animation";
 
 const ArrowLeft = () => (
   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -51,8 +52,8 @@ export default function MonsterModal({
   useEffect(() => {
     if (!isOpen) return;
 
-    if(isOpen) {
-      history.pushState({ modal: true}, "");
+    if (isOpen) {
+      history.pushState({ modal: true }, "");
     }
 
     const handleKey = (e: KeyboardEvent) => {
@@ -62,7 +63,7 @@ export default function MonsterModal({
     };
 
     const handlePopState = () => {
-      if(isOpen) handleBack();
+      if (isOpen) handleBack();
     };
 
     const handleWheel = (e: WheelEvent) => {
@@ -86,7 +87,7 @@ export default function MonsterModal({
     return () => {
       window.removeEventListener("keydown", handleKey);
       window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener("popstate", handlePopState )
+      window.removeEventListener("popstate", handlePopState)
     };
   }, [isOpen, currentIndex]);
 
@@ -98,17 +99,19 @@ export default function MonsterModal({
         <div className="fixed inset-0 z-[999] flex justify-center items-center overflow-hidden">
 
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            variants={ANIM_VARIANTS_MODAL.modalOverlay}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
             onClick={onClose}
             className="absolute inset-0 bg-black/90"
           />
 
           <motion.div
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            variants={ANIM_VARIANTS_MODAL.cardModal}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
             className={`
               relative flex flex-col bg-[#1a1428] text-white 
               w-full h-full sm:w-[550px] sm:h-auto sm:max-h-[95vh] 
@@ -120,10 +123,11 @@ export default function MonsterModal({
             <div className="pt-14 pb-4 text-center">
               <AnimatePresence mode="wait">
                 <motion.h2
+                  variants={ANIM_VARIANTS_MODAL.cardTitleModal}
                   key={currentMonster.name}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
                   className="text-3xl sm:text-4xl font-black uppercase tracking-widest italic text-[#c9a227]"
                 >
                   {currentMonster.name}
@@ -133,11 +137,11 @@ export default function MonsterModal({
 
             <div
               className="relative flex-1 sm:h-[350px] min-h-[300px] flex items-center justify-center bg-black/40"
-              style={{ 
-                backgroundImage: `url(${background})`, 
+              style={{
+                backgroundImage: `url(${background})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-                perspective: "1200px" 
+                perspective: "1200px"
               }}
             >
               <button
@@ -161,15 +165,12 @@ export default function MonsterModal({
 
                   return (
                     <motion.div
+                      variants={ANIM_VARIANTS_MODAL.offsetCardModal}
+                      custom={offset}
                       key={idx}
-                      animate={{
-                        x: offset * 240,
-                        rotateY: offset * -35,
-                        scale: offset === 0 ? 1 : 0.6,
-                        opacity: offset === 0 ? 1 : 0.3,
-                        z: offset === 0 ? 0 : -150
-                      }}
-                      transition={{ type: "spring", stiffness: 180, damping: 25 }}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
                       className="absolute"
                     >
                       <div style={{ marginLeft: `${monster.marginLeftModal}rem` }} className={offset !== 0 ? "blur-sm" : ""}>
@@ -184,10 +185,11 @@ export default function MonsterModal({
             <div className="p-8 bg-[#130f1d] border-t border-[#c9a227]/20 flex flex-col items-center">
               <AnimatePresence mode="wait">
                 <motion.div
+                  variants={ANIM_VARIANTS_MODAL.descCardModal}
                   key={currentIndex}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
                   className="flex flex-col items-center w-full"
                 >
                   <p className="text-gray-400 text-center text-sm sm:text-base italic mb-8 min-h-[50px] max-w-md">
