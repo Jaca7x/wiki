@@ -7,6 +7,7 @@ import Footer from "@/components/ui/Footer";
 
 import Home from "@/pages/Home";
 import Monsters from "@/pages/Monsters";
+import Technologies from "@/pages/Technologies";
 
 function AppContent() {
 
@@ -15,11 +16,9 @@ function AppContent() {
       <NavBar />
 
       <Routes>
-        <Route
-          path="/"
-          element={<Home />}
-        />
+        <Route path="/" element={<Home />} />
         <Route path="/monsters" element={<Monsters />} />
+        <Route path="/technologies" element={<Technologies />} />
       </Routes>
 
       <Footer />

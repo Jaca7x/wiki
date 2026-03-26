@@ -2,7 +2,6 @@ import { useLocation, Link } from "react-router-dom";
 import logo from "@/assets/imgs/icon/icon_helmet.png";
 import { useState, useEffect } from "react";
 import HamburgerMenu from "./HamburgerMenu";
-import { Sparkles } from "lucide-react";
 
 export default function NavBar() {
   const { pathname } = useLocation();
@@ -14,7 +13,7 @@ export default function NavBar() {
     if (isHome) {
       return [
         { name: "Bestiário", path: "/monsters" },
-        { name: "Ferramentas", path: "/tools" },
+        { name: "Tecnologias", path: "/technologies" },
         { name: "Sobre", path: "/us" },
       ];
     }
@@ -24,6 +23,14 @@ export default function NavBar() {
         { name: "Wolf", path: "/monsters#wolfs" },
         { name: "Boss", path: "/monsters#boss" },
         { name: "Npcs", path: "/monsters#npcs" }
+      ];
+    }
+    if (pathname.startsWith("/technologies")) {
+      return [
+        { name: "Stack", path: "/technologies#stack" },
+        { name: "Arquitetura", path: "/technologies#architecture" },
+        { name: "Conceitos", path: "/monsters#concepts" },
+        { name: "Sistemas", path: "/monsters#systems" }
       ];
     }
     return [{ name: "Início", path: "/" }];
@@ -79,7 +86,6 @@ export default function NavBar() {
                         ${isActive ? "text-blue-400" : "text-gray-400 hover:text-white"}
                       `}
                     >
-                      {isActive && <Sparkles size={12} className="animate-pulse" />}
                       {link.name}
                     </Link>
 
