@@ -26,3 +26,12 @@ html {
 body {
   background-color: #0f0c1a;
 }
+
+button,
+button:focus,
+button:active,
+div:focus {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  box-shadow: none !important;
+}
