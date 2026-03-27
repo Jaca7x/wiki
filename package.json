@@ -2,7 +2,6 @@
   "name": "wiki",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://Jaca7x.github.io/Knight-s-Quest-Wiki",
   "type": "module",
   "scripts": {
     "dev": "vite",
