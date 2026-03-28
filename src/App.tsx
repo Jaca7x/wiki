@@ -34,7 +34,7 @@ export default function App() {
   }
 
   return (
-    <BrowserRouter basename="/Knight-s-Quest-Wiki">
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <AppContent />
     </BrowserRouter>
   );
