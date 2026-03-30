@@ -33,15 +33,16 @@ export default function MonsterCard({
 }: MonsterCardProps) {
     return (
         <div
-            className="flex flex-col items-center justify-between bg-black/40 p-6 rounded-lg 
+            className="flex flex-col relative items-center justify-between bg-black/40 p-6 rounded-lg 
                        w-80 min-h-[320px] flex-shrink-0 snap-center
                        transition-all duration-300 border border-transparent 
-                       hover:border-[#c9a227]/30 cursor-pointer"
+                       hover:border-[#c9a227]/30 cursor-pointer 
+                       z-10 hover:z-20"
             onMouseEnter={onHover}
             onMouseLeave={onLeave}
             onClick={onClick}
         >
-            <div className="flex items-center justify-center h-[200px] w-full">
+            <div className="flex items-center justify-center h-[200px] w-full pointer-events-none">
                 <div style={{ marginLeft: `${marginLeft}px`, marginBottom: `${marginBottom}px` }}>
                     <SpriteAnimator
                         sprite={sprite}
@@ -53,7 +54,7 @@ export default function MonsterCard({
                     />
                 </div>
             </div>
-            <p className="text-[#c9a227] font-semibold uppercase tracking-widest text-center mt-4">
+            <p className="text-[#c9a227] font-semibold uppercase tracking-widest text-center mt-4 pointer-events-none">
                 {name}
             </p>
         </div>
