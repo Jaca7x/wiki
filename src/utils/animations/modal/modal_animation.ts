@@ -1,4 +1,4 @@
-interface AnimVariantsModalProps {
+export interface AnimVariantsModalProps {
   offset: number;
 }
 

@@ -4,6 +4,8 @@ import background from "@/assets/imgs/backgrounds/background-main.png";
 import { useEffect, useState, useRef } from "react";
 import type { MonsterData } from "@/data/monster";
 import { ANIM_VARIANTS_MODAL } from "@/utils/animations/modal/modal_animation";
+import type { AnimVariantsModalProps } from "@/utils/animations/modal/modal_animation"
+import { createPortal } from "react-dom";
 
 const ArrowLeft = () => (
   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -94,127 +96,140 @@ export default function MonsterModal({
   const currentMonster = monsters[currentIndex];
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <div className="fixed inset-0 z-[999] flex justify-center items-center overflow-hidden">
+    <>
 
-          <motion.div
-            variants={ANIM_VARIANTS_MODAL.modalOverlay}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            onClick={onClose}
-            className="absolute inset-0 bg-black/90"
-          />
+      {createPortal(
+        <AnimatePresence>
 
-          <motion.div
-            variants={ANIM_VARIANTS_MODAL.cardModal}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            className={`
-              relative flex flex-col bg-[#1a1428] text-white 
-              w-full h-full sm:w-[550px] sm:h-auto sm:max-h-[95vh] 
-              sm:rounded-2xl sm:border-2 sm:border-[#c9a227] 
-              shadow-2xl z-[1000] overflow-hidden
+          <>
+            {
+              isOpen && (
+                <div className={`fixed inset-0 z-[999] flex justify-center items-center overflow-hidden pointer-events-none`}>
+
+                  <motion.div
+                    variants={ANIM_VARIANTS_MODAL.modalOverlay}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    onClick={onClose}
+                    className="absolute inset-0 bg-black/90 pointer-events-auto"
+                  />
+
+                  <motion.div
+                    variants={ANIM_VARIANTS_MODAL.cardModal}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    className={`
+              relative flex flex-col bg-[#1a1428] text-white
+      w-full h-full sm:w-[550px] sm:h-auto sm:max-h-[95vh]
+      sm:rounded-2xl sm:border-2 sm:border-[#c9a227]
+      shadow-2xl z-[1000] overflow-hidden pointer-events-auto
             `}
-          >
+                  >
 
-            <div className="pt-4 pb-4 text-center">
-              <AnimatePresence mode="wait">
-                <motion.h2
-                  variants={ANIM_VARIANTS_MODAL.cardTextsModal}
-                  key={currentMonster.name}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  className="text-3xl sm:text-4xl font-black uppercase tracking-widest italic text-[#c9a227]"
-                >
-                  {currentMonster.name}
-                </motion.h2>
-              </AnimatePresence>
-            </div>
+                    <div className="pt-4 pb-4 text-center">
+                      <AnimatePresence mode="wait">
+                        <motion.h2
+                          variants={ANIM_VARIANTS_MODAL.cardTextsModal}
+                          key={currentMonster.name}
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          className="text-3xl sm:text-4xl font-black uppercase tracking-widest italic text-[#c9a227]"
+                        >
+                          {currentMonster.name}
+                        </motion.h2>
+                      </AnimatePresence>
+                    </div>
 
-            <div
-              className="relative  sm:h-[350px] min-h-[300px] flex items-center justify-center bg-black/40"
-              style={{
-                backgroundImage: `url(${background})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                perspective: "1200px"
-              }}
-            >
-              <button
-                onClick={handlePrev}
-                className={`absolute left-4 z-[1100] p-3 text-[#c9a227] hover:scale-125 transition-all active:scale-90 ${currentIndex === 0 ? "opacity-0 pointer-events-none" : "opacity-100 cursor-pointer"}`}
-              >
-                <ArrowLeft />
-              </button>
-
-              <button
-                onClick={handleNext}
-                className={`absolute right-4 z-[1100] p-3 text-[#c9a227] hover:scale-125 transition-all active:scale-90 ${currentIndex === monsters.length - 1 ? "opacity-0 pointer-events-none" : "opacity-100 cursor-pointer"}`}
-              >
-                <ArrowRight />
-              </button>
-
-              <div className="relative w-full h-full flex items-center justify-center pointer-events-none" style={{ transformStyle: 'preserve-3d' }}>
-                {monsters.map((monster, idx) => {
-                  const offset = idx - currentIndex;
-                  if (Math.abs(offset) > 1) return null;
-
-                  return (
-                    <motion.div
-                      variants={ANIM_VARIANTS_MODAL.offsetCardModal}
-                      custom={offset}
-                      key={idx}
-                      initial="hidden"
-                      animate="visible"
-                      exit="exit"
-                      className="absolute"
+                    <div
+                      className="relative  sm:h-[350px] min-h-[300px] flex items-center justify-center bg-black/40"
+                      style={{
+                        backgroundImage: `url(${background})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        perspective: "1200px"
+                      }}
                     >
-                      <div style={{ marginLeft: `${monster.marginLeftModal}rem` }} className={offset !== 0 ? "blur-sm" : ""}>
-                        <SpriteAnimator {...monster} />
+                      <button
+                        onClick={handlePrev}
+                        className={`absolute left-4 z-[1100] p-3 text-[#c9a227] hover:scale-125 transition-all active:scale-90 ${currentIndex === 0 ? "opacity-0 pointer-events-none" : "opacity-100 cursor-pointer"}`}
+                      >
+                        <ArrowLeft />
+                      </button>
+
+                      <button
+                        onClick={handleNext}
+                        className={`absolute right-4 z-[1100] p-3 text-[#c9a227] hover:scale-125 transition-all active:scale-90 ${currentIndex === monsters.length - 1 ? "opacity-0 pointer-events-none" : "opacity-100 cursor-pointer"}`}
+                      >
+                        <ArrowRight />
+                      </button>
+
+                      <div className="relative w-full h-full flex items-center justify-center pointer-events-none" style={{ transformStyle: 'preserve-3d' }}>
+                        {monsters.map((monster, idx) => {
+                          const offsetValue = idx - currentIndex;
+                          if (Math.abs(offsetValue) > 1) return null;
+
+                          return (
+                            <motion.div
+                              variants={ANIM_VARIANTS_MODAL.offsetCardModal}
+                              custom={{ offset: offsetValue } as AnimVariantsModalProps}
+                              key={idx}
+                              initial="hidden"
+                              animate="visible"
+                              exit="exit"
+                              className="absolute"
+                            >
+                              <div style={{ marginLeft: `${monster.marginLeftModal}rem` }} className={offsetValue !== 0 ? "blur-sm" : ""}>
+                                <SpriteAnimator {...monster} />
+                              </div>
+                            </motion.div>
+                          );
+                        })}
                       </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
+                    </div>
 
-            <div className="p-8 bg-[#130f1d] border-t border-[#c9a227]/20 flex flex-col items-center">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  variants={ANIM_VARIANTS_MODAL.cardTextsModal}
-                  key={currentIndex}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  className="flex flex-col items-center w-full"
-                >
-                  <p className="text-gray-400 text-center text-sm sm:text-base italic mb-8 min-h-[50px] max-w-md">
-                    "{currentMonster.description}"
-                  </p>
+                    <div className="p-8 bg-[#130f1d] border-t border-[#c9a227]/20 flex flex-col items-center">
+                      <AnimatePresence mode="wait">
+                        <motion.div
+                          variants={ANIM_VARIANTS_MODAL.cardTextsModal}
+                          key={currentIndex}
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          className="flex flex-col items-center w-full"
+                        >
+                          <p className="text-gray-400 text-center text-sm sm:text-base italic mb-8 min-h-[50px] max-w-md">
+                            "{currentMonster.description}"
+                          </p>
 
-                  <div className="grid grid-cols-3 gap-4 w-full max-w-sm">
-                    <StatBadge label="ATAQUE" value={currentMonster.valueAtk} color="text-red-500" />
-                    <StatBadge label="VIDA" value={currentMonster.valueLife} color="text-blue-500" />
-                    <StatBadge label="VELOCIDADE" value={currentMonster.valueSpe} color="text-green-500" />
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+                          <div className="grid grid-cols-3 gap-4 w-full max-w-sm">
+                            <StatBadge label="ATAQUE" value={currentMonster.valueAtk} color="text-red-500" />
+                            <StatBadge label="VIDA" value={currentMonster.valueLife} color="text-blue-500" />
+                            <StatBadge label="VELOCIDADE" value={currentMonster.valueSpe} color="text-green-500" />
+                          </div>
+                        </motion.div>
+                      </AnimatePresence>
+                    </div>
 
-            <button
-              onClick={onClose}
-              className="w-full py-6 bg-[#c9a227] text-black font-black uppercase tracking-[0.2em] hover:bg-[#e0b52d] transition-colors mt-auto sm:mt-0 fixed sm:static bottom-0"
-            >
-              Voltar ao Jogo
-            </button>
-          </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
+                    <button
+                      onClick={onClose}
+                      className="w-full py-6 bg-[#c9a227] text-black font-black uppercase tracking-[0.2em] hover:bg-[#e0b52d] transition-colors mt-auto sm:mt-0 fixed sm:static bottom-0 cursor-pointer"
+                    >
+                      Voltar ao Jogo
+                    </button>
+                  </motion.div>
+                </div >
+              )
+            }
+          </>
+        </AnimatePresence >,
+        document.body
+      )
+      }
+
+    </>
   );
 }
 
