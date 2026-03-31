@@ -7,6 +7,15 @@ export default function NavBar() {
   const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
 
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const el = document.querySelector(hash);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [hash]);
+
   const isHome = pathname === "/";
 
   const getNavLinks = () => {
