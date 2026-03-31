@@ -5,8 +5,11 @@ export default function Technologies() {
 
     return (
         <main>
-            <StackCards />
-            <ArchitectureExplorer />
+            <section id="stack" className="scroll-mt-24"><StackCards /></section>
+
+            <section id="architecture" className="scroll-mt-24">
+                <ArchitectureExplorer />
+            </section>
         </main>
     );
 }
