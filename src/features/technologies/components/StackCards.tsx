@@ -21,7 +21,7 @@ export default function StackCards() {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-[700px] p-4 md:my-20 my-10 overflow-hidden">
+        <div className="flex items-center justify-center min-h-[700px] p-4 md:my-20 my-30 overflow-hidden">
 
             <div className="relative w-full max-w-4xl">
 
@@ -49,7 +49,6 @@ export default function StackCards() {
                             },
                             opacity: { duration: 0.3 },
                         }}
-                        id="stack"
                         className="relative w-full bg-[#120f1d] grid grid-cols-1 md:grid-cols-2 rounded-2xl border shadow-[0_0_50px_rgba(0,0,0,1)] overflow-visible"
                         style={{ borderColor: `${currentTech.color}44` }}
                     >
