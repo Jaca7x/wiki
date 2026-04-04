@@ -11,16 +11,16 @@ export function useSpriteAnimation({ frames, fps }: UseSpriteAnimationProps) {
     useEffect(() => {
 
         if (fps === 0) {
-            setFrame(0);
-            return
-        };
+            setTimeout(() => setFrame(0), 0);
+            return;
+        }
 
         const interval = setInterval(() => {
             setFrame((prev) => (prev + 1) % frames);
         }, 1000 / fps);
 
         return () => clearInterval(interval);
-        
+
     }, [frames, fps]);
 
     return frame;
