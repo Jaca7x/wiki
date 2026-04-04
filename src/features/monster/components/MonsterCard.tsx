@@ -34,7 +34,7 @@ export default function MonsterCard({
     return (
         <div
             className="flex flex-col relative items-center justify-between bg-black/40 p-6 rounded-lg 
-                       w-80 min-h-[320px] flex-shrink-0 snap-center
+                       w-80 min-h-80 shrink-0 snap-center
                        transition-all duration-300 border border-transparent 
                        hover:border-[#c9a227]/30 cursor-pointer 
                        z-10 hover:z-20"
@@ -42,7 +42,7 @@ export default function MonsterCard({
             onMouseLeave={onLeave}
             onClick={onClick}
         >
-            <div className="flex items-center justify-center h-[200px] w-full pointer-events-none">
+            <div className="flex items-center justify-center h-50 w-full pointer-events-none">
                 <div style={{ marginLeft: `${marginLeft}px`, marginBottom: `${marginBottom}px` }}>
                     <SpriteAnimator
                         sprite={sprite}

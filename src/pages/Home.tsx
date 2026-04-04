@@ -5,14 +5,14 @@ import initialTitle from "@/features/home/assets/imgs/initial-title.png";
 export default function Home() {
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0f0c1a] via-[#1a1428] to-[#2b1d3a] text-white">
+    <div className="min-h-screen bg-linear-to-b from-[#0f0c1a] via-[#1a1428] to-[#2b1d3a] text-white">
 
       <section>
         <div
-          className="relative h-[100vh] bg-cover bg-top flex items-center justify-center"
+          className="relative h-screen bg-cover bg-top flex items-center justify-center"
           style={{ backgroundImage: `url(${background})` }}
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+          <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent"></div>
 
           <img
             src={logo}

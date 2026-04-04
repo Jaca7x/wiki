@@ -54,7 +54,7 @@ export default function NavBar() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[100] pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-100 pointer-events-none">
 
 
       <div className={`
@@ -63,7 +63,7 @@ export default function NavBar() {
       `}>
         <nav className="relative group">
 
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+          <div className="absolute -inset-0.5 bg-linear-to-r from-blue-600 to-cyan-500 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
 
           <div className="relative flex items-center bg-[#0a0a0f]/90 backdrop-blur-xl border border-white/10 rounded-full px-2 py-1.5 shadow-2xl">
 
@@ -79,7 +79,7 @@ export default function NavBar() {
               />
             </Link>
 
-            <div className="w-[1px] h-4 bg-white/10 mr-2"></div>
+            <div className="w-px h-4 bg-white/10 mr-2"></div>
 
             <ul className="flex items-center gap-1">
               {navLinks.map((link) => {

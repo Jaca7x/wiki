@@ -19,7 +19,7 @@ export default function GameSystems() {
                         </div>
 
                         {/* ÁREA DA IMAGEM / GIF: Altura fixa para manter o alinhamento do grid */}
-                        <div className="flex-1 flex items-center justify-center bg-black/20 p-6 min-h-[250px] md:min-h-[300px]">
+                        <div className="flex-1 flex items-center justify-center bg-black/20 p-6 min-h-62.5 md:min-h-75">
                             <div className="relative w-full h-full flex items-center justify-center">
                                 <img
                                     src={system.gif}

@@ -21,7 +21,7 @@ export default function StackCards() {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-[700px] p-4 md:my-20 my-30 overflow-hidden">
+        <div className="flex items-center justify-center min-h-175 p-4 md:my-20 my-30 overflow-hidden">
 
             <div className="relative w-full max-w-4xl">
 
@@ -62,10 +62,10 @@ export default function StackCards() {
                             <h1 style={{ color: currentTech.color }} className="text-center text-xl md:text-3xl py-6 font-black tracking-[0.4em] uppercase drop-shadow-md">
                                 {currentTech.title}
                             </h1>
-                            <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#3B354F] to-transparent" />
+                            <div className="h-px w-full bg-linear-to-r from-transparent via-[#3B354F] to-transparent" />
                         </div>
 
-                        <div className="relative flex items-center justify-center p-8 md:p-16 min-h-[300px]">
+                        <div className="relative flex items-center justify-center p-8 md:p-16 min-h-75">
                             <motion.div
                                 animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.4, 0.1] }}
                                 transition={{ duration: 4, repeat: Infinity }}
@@ -81,7 +81,7 @@ export default function StackCards() {
                         </div>
 
                         <div className="flex flex-col items-center justify-center p-8 md:p-12 relative">
-                            <div className="hidden md:block absolute left-0 top-10 bottom-10 w-[1px] bg-gradient-to-b from-transparent via-[#3B354F] to-transparent" />
+                            <div className="hidden md:block absolute left-0 top-10 bottom-10 w-px bg-linear-to-b from-transparent via-[#3B354F] to-transparent" />
 
                             <div className="relative">
                                 <span style={{ color: `${currentTech.color}30` }} className="absolute -top-6 -left-4 text-6xl font-serif select-none italic">“</span>

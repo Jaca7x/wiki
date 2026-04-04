@@ -10,7 +10,7 @@ export default function ArchitectureExplorer() {
 
     return (
         <div className="flex items-center justify-center p-4">
-            <div className="flex flex-col md:flex-row w-full h-[650px] md:h-[600px] max-w-6xl mx-auto my-10 md:my-20 bg-[#120f1d] border-2 border-[#3B354F] rounded-2xl shadow-[0_0_40px_rgba(0,0,0,0.7)] overflow-hidden">
+            <div className="flex flex-col md:flex-row w-full h-162.5 md:h-150 max-w-6xl mx-auto my-10 md:my-20 bg-[#120f1d] border-2 border-[#3B354F] rounded-2xl shadow-[0_0_40px_rgba(0,0,0,0.7)] overflow-hidden">
 
                 <div className={`
                     ${showEditor ? "hidden md:flex" : "flex"} 
@@ -67,7 +67,7 @@ export default function ArchitectureExplorer() {
                             ❮
                         </button>
 
-                        <div className="bg-[#120f1d] px-6 flex items-center gap-3 border-t-2 border-[#FACC15] border-r border-[#3B354F] min-w-[150px]">
+                        <div className="bg-[#120f1d] px-6 flex items-center gap-3 border-t-2 border-r border-[#3B354F] min-w-37.5">
                             <img src={activeFolder.icon} alt="" className="w-4 h-4" />
                             <span className="text-xs text-[#FACC15] font-mono">
                                 {activeFolder.name}
@@ -123,7 +123,7 @@ export default function ArchitectureExplorer() {
                                                     <SyntaxHighlighter
                                                         language="cpp"
                                                         style={vscDarkPlus}
-                                                        {...({} as any)} // Previne erro de tipos se necessário
+                                                        {...({} as Record<string, unknown>)} // Previne erro de tipos se necessário
                                                         codeTagProps={{
                                                             style: {
                                                                 display: 'block',

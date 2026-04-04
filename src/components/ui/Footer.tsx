@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="bg-gradient-to-t from-[#0f0c1a] via-[#1a1428] to-[#2b1d3a] text-white py-6">
+        <footer className="bg-linear-to-t from-[#0f0c1a] via-[#1a1428] to-[#2b1d3a] text-white py-6">
             <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
                 <div className="mb-4 md:mb-0">
                     <h2 className="text-lg font-bold">Knight's Quest</h2>
