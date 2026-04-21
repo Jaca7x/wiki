@@ -8,6 +8,9 @@ import Footer from "@/components/ui/Footer";
 import Home from "@/pages/Home";
 import Monsters from "@/pages/Monsters";
 import Technologies from "@/pages/Technologies";
+import Contact from "@/pages/Contact";
+import Privacy from "@/pages/Privacy";
+import Social from "@/pages/Social";
 
 function AppContent() {
 
@@ -19,6 +22,12 @@ function AppContent() {
         <Route path="/" element={<Home />} />
         <Route path="/monsters" element={<Monsters />} />
         <Route path="/technologies" element={<Technologies />} />
+      </Routes>
+
+      <Routes>
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/social" element={<Social />} />
       </Routes>
 
       <Footer />
