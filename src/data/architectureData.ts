@@ -1,12 +1,12 @@
-import src_file from "@/features/technologies/assets/imgs/icons-files/folder-src.svg";
-import c_file from "@/features/technologies/assets/imgs/icons-files/c.svg";
-import makefiles_file from "@/features/technologies/assets/imgs/icons-files/makefile.svg";
-import lib_file from "@/features/technologies/assets/imgs/icons-files/folder-lib.svg";
-import assets_file from "@/features/technologies/assets/imgs/icons-files/folder-resource.svg";
+import src_file from "@/features/technologies/assets/imgs/icons_files/folder-src.svg";
+import c_file from "@/features/technologies/assets/imgs/icons_files/c.svg";
+import makefiles_file from "@/features/technologies/assets/imgs/icons_files/makefile.svg";
+import lib_file from "@/features/technologies/assets/imgs/icons_files/folder-lib.svg";
+import assets_file from "@/features/technologies/assets/imgs/icons_files/folder-resource.svg";
 
-import src_open_file from "@/features/technologies/assets/imgs/icons-files/folder-src-open.svg";
-import lib_open_file from "@/features/technologies/assets/imgs/icons-files/folder-lib-open.svg";
-import assets_open_file from "@/features/technologies/assets/imgs/icons-files/folder-resource-open.svg";
+import src_open_file from "@/features/technologies/assets/imgs/icons_files/folder-src-open.svg";
+import lib_open_file from "@/features/technologies/assets/imgs/icons_files/folder-lib-open.svg";
+import assets_open_file from "@/features/technologies/assets/imgs/icons_files/folder-resource-open.svg";
 
 export interface FolderData {
   id: number;

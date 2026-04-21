@@ -1,9 +1,9 @@
-import c_logo from "@/features/technologies/assets/imgs/c.png";
-import raylib_logo from "@/features/technologies/assets/imgs/raylib.png";
-import raymath_logo from "@/features/technologies/assets/imgs/raymath.png";
-import json_logo from "@/features/technologies/assets/imgs/json.png";
-import makefile_logo from "@/features/technologies/assets/imgs/makefile.png";
-import tiled_logo from "@/features/technologies/assets/imgs/tiled.png";
+import c_logo from "@/features/technologies/assets/imgs/stacks_icon/c.png";
+import raylib_logo from "@/features/technologies/assets/imgs/stacks_icon/raylib.png";
+import raymath_logo from "@/features/technologies/assets/imgs/stacks_icon/raymath.png";
+import json_logo from "@/features/technologies/assets/imgs/stacks_icon/json.png";
+import makefile_logo from "@/features/technologies/assets/imgs/stacks_icon/makefile.png";
+import tiled_logo from "@/features/technologies/assets/imgs/stacks_icon/tiled.png";
 
 export interface TechnologiesData {
   id: number;
