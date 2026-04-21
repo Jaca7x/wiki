@@ -38,8 +38,7 @@ export default function NavBar() {
       return [
         { name: "Stack", path: "/technologies#stack" },
         { name: "Arquitetura", path: "/technologies#architecture" },
-        { name: "Conceitos", path: "/monsters#concepts" },
-        { name: "Sistemas", path: "/monsters#systems" }
+        { name: "Sistemas", path: "/technologies#systems" }
       ];
     }
     return [{ name: "Início", path: "/" }];
