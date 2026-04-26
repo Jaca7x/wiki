@@ -21,7 +21,7 @@ export default function StackCards() {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-175 p-4 md:-my-10 my-10 overflow-hidden">
+        <div className="flex items-center justify-center min-h-185 p-4">
 
             <div className="relative w-full max-w-4xl">
 

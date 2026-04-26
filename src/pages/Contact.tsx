@@ -42,8 +42,10 @@ export default function Contact() {
                             <div className="w-full bg-[#0d0b16] border border-[#3B354F] rounded-xl px-6 py-4 font-mono text-sm text-gray-300 flex items-center justify-between group-hover/input:border-[#FACC15]/50 transition-all">
                                 <span className="truncate mr-4">{email}</span>
 
-                                <button onClick={handleCopy}
-                                    className="bg-[#3B354F]/50 hover:bg-[#FACC15] hover:text-black p-2 rounded-lg transition-all duration-300 cursor-pointer active:scale-95"
+                                <button
+                                    tabIndex={0}
+                                    onClick={handleCopy}
+                                    className="bg-[#3B354F]/50 hover:bg-[#FACC15] hover:text-black p-2 rounded-lg transition-all duration-300 cursor-pointer active:scale-95 focus:border focus:border-[#FACC15]"
                                     title="Copiar E-mail"
                                 >
                                     {copy ? (

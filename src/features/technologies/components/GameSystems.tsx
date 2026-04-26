@@ -16,7 +16,7 @@ export default function GameSystems() {
     }, [selectSystem]);
 
     return (
-        <section className="py-20 px-4 bg-[#120f1d] flex justify-center">
+        <section className="py-20 px-4  flex justify-center">
             <div className="grid md:grid-cols-2 grid-cols-1 max-w-5xl w-full gap-10">
 
                 {gameSystems.map((system) => (
