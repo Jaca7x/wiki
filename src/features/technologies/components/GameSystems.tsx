@@ -6,6 +6,17 @@ import { useEffect, useState } from "react";
 export default function GameSystems() {
     const [selectSystem, setSelectSystem] = useState<GameSystemsData | null>(null);
 
+    const handleKeyDown = (e: React.KeyboardEvent, system: GameSystemsData) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setSelectSystem(system)
+        }
+        else if (e.key === 'Escape') {
+            e.preventDefault();
+            setSelectSystem(null)
+        }
+    }
+
     useEffect(() => {
         if (selectSystem) {
             document.documentElement.style.overflow = 'hidden';
@@ -21,6 +32,7 @@ export default function GameSystems() {
 
                 {gameSystems.map((system) => (
                     <div
+                        onKeyDown={(e) => handleKeyDown(e, system)}
                         role="button"
                         tabIndex={0}
                         key={system.id}
