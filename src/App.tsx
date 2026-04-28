@@ -10,6 +10,7 @@ import Monsters from "@/pages/Monsters";
 import Technologies from "@/pages/Technologies";
 import Contact from "@/pages/Contact";
 import Social from "@/pages/Social";
+import Us from "@/pages/Us"
 
 function AppContent() {
 
@@ -21,6 +22,7 @@ function AppContent() {
         <Route path="/" element={<Home />} />
         <Route path="/monsters" element={<Monsters />} />
         <Route path="/technologies" element={<Technologies />} />
+        <Route path="/us" element={<Us />} />
       </Routes>
 
       <Routes>
