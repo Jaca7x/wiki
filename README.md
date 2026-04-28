@@ -1,3 +1,1 @@
-<h1>Em desenvolvimento!</h1>
-
-<p>Wiki do meu jogo Knight's Quest para fins de tentativas de aprendizados usando React + TypeScript + Vite + TailwindCSS ;)</p>
+Esse projeto é um complemento de um outro projeto, https://github.com/Jaca7x/Knight-s-Quest-Wiki
